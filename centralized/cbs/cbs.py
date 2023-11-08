@@ -294,7 +294,18 @@ class CBS(object):
                 new_node.constraint_dict[agent].add_constraint(constraint_dict[agent])
 
                 self.env.constraint_dict = new_node.constraint_dict
-                print(agent, " : compute solution! P: ", P)
+                # P : HighLevelNode
+                #print(agent, " : compute solution! P: ", P.solution, P.constraint_dict, P.cost)
+                #print(agent, " : compute solution! P: ",P.solution)
+                print(agent, " : compute solution! P: ",P.constraint_dict["agent0"].__str__(), P.constraint_dict["agent1"].__str__(), P.constraint_dict["agent2"].__str__())
+                #print(agent, " : compute solution! P: ",P.cost)
+
+                #class HighLevelNode(object):
+                #    def __init__(self):
+                #        self.solution = {}
+                #        self.constraint_dict = {}
+                #        self.cost = 0
+
                 new_node.solution = self.env.compute_solution()
                 if not new_node.solution:
                     continue
