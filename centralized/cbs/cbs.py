@@ -228,6 +228,7 @@ class Environment(object):
         for agent in self.agent_dict.keys():
             self.constraints = self.constraint_dict.setdefault(agent, Constraints())
             local_solution = self.a_star.search(agent)
+            print("   ", agent, " : astar search!")
             if not local_solution:
                 return False
             solution.update({agent:local_solution})
@@ -270,6 +271,10 @@ class CBS(object):
 
         self.open_set |= {start}
 
+        print("debug")
+        print("start.constraint_dict:", start.constraint_dict)
+        print("start.constraint_dict agent0:", start.constraint_dict["agent0"].__str__())
+
         while self.open_set:
             P = min(self.open_set)
             self.open_set -= {P}
@@ -289,6 +294,7 @@ class CBS(object):
                 new_node.constraint_dict[agent].add_constraint(constraint_dict[agent])
 
                 self.env.constraint_dict = new_node.constraint_dict
+                print(agent, " : compute solution! P: ", P)
                 new_node.solution = self.env.compute_solution()
                 if not new_node.solution:
                     continue
