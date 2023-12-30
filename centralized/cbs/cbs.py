@@ -16,9 +16,10 @@ from copy import deepcopy
 from a_star import AStar
 
 class Location(object):
-    def __init__(self, x=-1, y=-1):
+    def __init__(self, x=-1, y=-1, dir=0):
         self.x = x
         self.y = y
+        self.dir = dir
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
     def __str__(self):
@@ -218,8 +219,8 @@ class Environment(object):
 
     def make_agent_dict(self):
         for agent in self.agents:
-            start_state = State(0, Location(agent['start'][0], agent['start'][1]))
-            goal_state = State(0, Location(agent['goal'][0], agent['goal'][1]))
+            start_state = State(0, Location(agent['start'][0], agent['start'][1], agent['start'][2]))
+            goal_state = State(0, Location(agent['goal'][0], agent['goal'][1], agent['goal'][2]))
 
             self.agent_dict.update({agent['name']:{'start':start_state, 'goal':goal_state}})
 
