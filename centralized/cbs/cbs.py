@@ -13,7 +13,7 @@ from math import fabs
 from itertools import combinations
 from copy import deepcopy
 
-from cbs.a_star import AStar
+from a_star import AStar
 
 class Location(object):
     def __init__(self, x=-1, y=-1):
@@ -342,11 +342,23 @@ def main():
     obstacles = param["map"]["obstacles"]
     agents = param['agents']
 
+    print("=== dimension ===")
+    print(dimension)
+    print("=== obstacles ===")
+    print(obstacles)
+    print("=== agents ===")
+    print(agents)
+
     env = Environment(dimension, agents, obstacles)
 
     # Searching
     cbs = CBS(env)
     solution = cbs.search()
+
+    print("=== solution ===")
+    print(solution)
+    print("================")
+
     if not solution:
         print(" Solution not found" )
         return
